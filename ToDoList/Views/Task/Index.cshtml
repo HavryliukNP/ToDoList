@@ -1,0 +1,63 @@
+﻿@model ToDoList.Models.CategoryViewModel
+
+<h1 class="mb-3 text-center">Створення задачі</h1>
+<form id="createTaskForm" method="post" action="/Task/Create">
+
+    <div class="mb-3">
+        <label class="form-label">Назва задачі</label>
+        <input name="title" type="text" class="form-control" required=""/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Дата виконання (необов’язково)</label>
+        <input name="dueDate" type="date" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Категорія задачі</label>
+        <select name="CategoryId" class="form-control">
+            @foreach (var category in Model.Categories)
+            {
+            <option value="@category.Key">@category.Value</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Опис задачі</label>
+        <textarea name="description" type="text" class="form-control" rows="3"></textarea>
+    </div>
+    <button id="createTask" class="btn btn-primary">Створити</button>
+</form>
+
+<h2 class="text-center">Всі задачі</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Назва</th>
+        <th>Опис</th>
+        <th>Дата виконання</th>
+        <th>Категорія</th>
+        <th>Виконано</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var task in Model.Tasks)
+    {
+    <tr>
+        <td>@task.Title</td>
+        <td>@task.Description</td>
+        <td>@task.DueDate?.ToString("dd-MM-yyyy")</td>
+
+        <td>@Model.Categories[task.CategoryId]</td>
+
+        <td>
+            <form method="post" action="/Task/UpdateTaskStatus">
+                <input type="hidden" name="taskId" value="@task.Id" />
+                <input type="checkbox" name="isCompleted" value="true" @(task.IsCompleted ? "checked" : "") onchange="this.form.submit()" />
+            </form>
+        </td>
+    </tr>
+    }
+    </tbody>
+</table>

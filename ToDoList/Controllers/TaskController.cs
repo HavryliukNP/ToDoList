@@ -24,7 +24,7 @@ public class TaskController : Controller
         var tasks = _taskRepository.GetAllTask();
         var categories = _categoryRepository.GetAllCategories().ToDictionary(c => c.Id, c => c.Name);
 
-        var viewModel = new CategoryViewModel
+        var viewModel = new TaskViewModel
         {
             Tasks = tasks,
             Categories = categories
@@ -39,20 +39,6 @@ public class TaskController : Controller
     {
         _taskRepository.AddTask(task);
         return RedirectToAction("Index");
-    }
-    
-    public IActionResult List()
-    {
-        var tasks = _taskRepository.GetAllTask();
-        var categories = _categoryRepository.GetAllCategories().ToDictionary(c => c.Id, c => c.Name);
-
-        var viewModel = new CategoryViewModel
-        {
-            Tasks = tasks,
-            Categories = categories
-        };
-
-        return View(viewModel);
     }
 
     [HttpPost]

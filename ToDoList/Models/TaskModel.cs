@@ -8,6 +8,4 @@ public class TaskModel
     public DateTime? DueDate { get; set; }
     public int CategoryId { get; set; }
     public bool IsCompleted { get; set; }
-    
-    public CategoryModel Category { get; set; }
 }

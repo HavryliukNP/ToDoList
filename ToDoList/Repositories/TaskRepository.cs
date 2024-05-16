@@ -22,7 +22,7 @@ public class TaskRepository
 
     public List<TaskModel> GetAllTask()
     {
-        return _context.Tasks.Include(t => t.Category).OrderBy(t => t.IsCompleted).ToList();
+        return _context.Tasks.OrderBy(t => t.IsCompleted).ToList();
     }
 
     public void UpdateTaskStatus(int taskId, bool isCompleted)

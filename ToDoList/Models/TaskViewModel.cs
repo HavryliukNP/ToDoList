@@ -2,10 +2,6 @@
 
 public class TaskViewModel
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public string? Description { get; set; }
-    public DateTime? DueDate { get; set; }
-    public string Category { get; set; }
-    public bool IsCompleted { get; set; }
+    public Dictionary<int, string> Categories { get; set; }
+    public List<TaskModel> Tasks { get; set; }
 }

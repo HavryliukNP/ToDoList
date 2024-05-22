@@ -1,21 +1,36 @@
 ﻿@model ToDoList.Models.TaskViewModel
 
+<div class="d-flex justify-content-center mb-3">
+    <div class="btn-group" role="group">
+        <a class="btn @(Model.UseXml ? "btn-primary" : "btn-outline-primary")"
+           asp-action="Index" asp-controller="Task" asp-route-useXml="true" asp-route-isFromLink="true">
+            Показати завдання з XML
+        </a>
+        <a class="btn @(!Model.UseXml ? "btn-primary" : "btn-outline-primary")"
+           asp-action="Index" asp-controller="Task" asp-route-useXml="false" asp-route-isFromLink="true">
+            Показати завдання з SQL
+        </a>
+    </div>
+</div>
+
 <h1 class="mb-3 text-center">Створення задачі</h1>
-<form id="createTaskForm" method="post" action="/Task/Create">
+
+<form id="createTaskForm" method="post" asp-action="Create" asp-controller="Task">
+    <input type="hidden" name="useXml" value="@Model.UseXml" />
 
     <div class="mb-3">
-        <label class="form-label">Назва задачі</label>
-        <input name="title" type="text" class="form-control" required=""/>
+        <label class="form-label" for="title">Назва задачі</label>
+        <input id="title" name="title" type="text" class="form-control" required="required" />
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Дата виконання (необов’язково)</label>
-        <input name="dueDate" type="date" class="form-control"/>
+        <label class="form-label" for="dueDate">Дата виконання (необов’язково)</label>
+        <input id="dueDate" name="dueDate" type="date" class="form-control" />
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Категорія задачі</label>
-        <select name="CategoryId" class="form-control">
+        <label class="form-label" for="CategoryId">Категорія задачі</label>
+        <select id="CategoryId" name="CategoryId" class="form-control">
             @foreach (var category in Model.Categories)
             {
             <option value="@category.Key">@category.Value</option>
@@ -24,10 +39,10 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Опис задачі</label>
-        <textarea name="description" type="text" class="form-control" rows="3"></textarea>
+        <label class="form-label" for="description">Опис задачі</label>
+        <textarea id="description" name="description" class="form-control" rows="3"></textarea>
     </div>
-    <button id="createTask" class="btn btn-primary">Створити</button>
+    <button id="createTask" type="submit" class="btn btn-primary">Створити</button>
 </form>
 
 <h2 class="text-center">Всі задачі</h2>
@@ -48,12 +63,11 @@
         <td>@task.Title</td>
         <td>@task.Description</td>
         <td>@task.DueDate?.ToString("dd-MM-yyyy")</td>
-
         <td>@Model.Categories[task.CategoryId]</td>
-
         <td>
-            <form method="post" action="/Task/UpdateTaskStatus">
+            <form method="post" asp-action="UpdateTaskStatus" asp-controller="Task">
                 <input type="hidden" name="taskId" value="@task.Id" />
+                <input type="hidden" name="useXml" value="@Model.UseXml" />
                 <input type="checkbox" name="isCompleted" value="true" @(task.IsCompleted ? "checked" : "") onchange="this.form.submit()" />
             </form>
         </td>

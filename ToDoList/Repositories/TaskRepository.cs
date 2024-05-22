@@ -1,37 +1,44 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using ToDoList.Data;
+﻿using Dapper;
+using System.Data;
+using System.Data.SqlClient; 
 using ToDoList.Models;
 
-namespace ToDoList.Repositories;
-
-public class TaskRepository
+namespace ToDoList.Repositories
 {
-    private readonly ToDoContext _context;
-
-    public TaskRepository(ToDoContext context)
+    public class TaskRepository
     {
-        _context = context;
-    }
+        private readonly string _connectionString;
 
-    public void AddTask(TaskModel task)
-    {
-        _context.Tasks.Add(task);
-        _context.SaveChanges();
-    }
-
-    public List<TaskModel> GetAllTask()
-    {
-        return _context.Tasks.OrderBy(t => t.IsCompleted).ToList();
-    }
-
-    public void UpdateTaskStatus(int taskId, bool isCompleted)
-    {
-        var task = _context.Tasks.Find(taskId);
-        if (task != null)
+        public TaskRepository(string connectionString)
         {
-            task.IsCompleted = isCompleted;
-            _context.SaveChanges();
+            _connectionString = connectionString;
+        }
+
+        public void AddTask(TaskModel task)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string query = "INSERT INTO Tasks (Title, Description, DueDate, CategoryId, IsCompleted) VALUES (@Title, @Description, @DueDate, @CategoryId, @IsCompleted)";
+                db.Execute(query, task);
+            }
+        }
+        
+        public List<TaskModel> GetAllTasks()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT Id, Title, Description, DueDate, CategoryId, IsCompleted FROM Tasks ORDER BY IsCompleted";
+                return db.Query<TaskModel>(query).AsList();
+            }
+        }
+
+        public void UpdateTaskStatus(int taskId, bool isCompleted)
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string query = "UPDATE Tasks SET IsCompleted = @IsCompleted WHERE Id = @TaskId"; 
+                db.Execute(query, new { IsCompleted = isCompleted, TaskId = taskId });
+            }
         }
     }
 }

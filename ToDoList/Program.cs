@@ -1,10 +1,14 @@
-using Microsoft.EntityFrameworkCore;
-using ToDoList.Data;
+using ToDoList.Repositories; 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ToDoContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ToDoContext")));
+
+builder.Services.AddScoped<TaskRepository>(provider => new TaskRepository(builder.Configuration.GetConnectionString("ToDoContext")));
+builder.Services.AddScoped<CategoryRepository>(provider => new CategoryRepository(builder.Configuration.GetConnectionString("ToDoContext")));
+builder.Services.AddScoped<XmlTaskRepository>(provider => new XmlTaskRepository(builder.Configuration.GetConnectionString("XmlFilePath")));
+builder.Services.AddScoped<XmlCategoryRepository>(provider => new XmlCategoryRepository(builder.Configuration.GetConnectionString("XmlFilePath")));
+
+
 
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

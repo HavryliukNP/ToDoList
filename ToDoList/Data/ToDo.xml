@@ -1,0 +1,62 @@
+<DB>
+  <Categories>
+    <Category>
+      <Id>1</Id>
+      <Name>Робота</Name>
+    </Category>
+    <Category>
+      <Id>2</Id>
+      <Name>Навчання</Name>
+    </Category>
+    <Category>
+      <Id>3</Id>
+      <Name>Особистий розвиток</Name>
+    </Category>
+    <Category>
+      <Id>4</Id>
+      <Name>Здоров'я і фітнес</Name>
+    </Category>
+    <Category>
+      <Id>5</Id>
+      <Name>Сім'я та відпочинок</Name>
+    </Category>
+    <Category>
+      <Id>6</Id>
+      <Name>Фінанси</Name>
+    </Category>
+    <Category>
+      <Id>7</Id>
+      <Name>Домашні справи</Name>
+    </Category>
+    <Category>
+      <Id>8</Id>
+      <Name>Технології</Name>
+    </Category>
+    <Category>
+      <Id>9</Id>
+      <Name>Соціальні зв'язки</Name>
+    </Category>
+    <Category>
+      <Id>10</Id>
+      <Name>Творчість</Name>
+    </Category>
+    <Category>
+      <Id>11</Id>
+      <Name>Подорожі та пригоди</Name>
+    </Category>
+    <Category>
+      <Id>12</Id>
+      <Name>Дз</Name>
+    </Category>
+  </Categories>
+  <Tasks>
+    <Task>
+      <Id>1</Id>
+      <Title>Зробити дз</Title>
+      <Description>Математику та англійську</Description>
+      <DueDate>12-02-2024</DueDate>
+      <CategoryId>3</CategoryId>
+      <IsCompleted>True</IsCompleted>
+    </Task>
+  </Tasks>
+</DB>

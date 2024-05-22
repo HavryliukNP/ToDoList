@@ -1,18 +1,26 @@
-﻿using Microsoft.Data.SqlClient;
-using ToDoList.Data;
+﻿using Dapper;
+using System.Data;
+using System.Data.SqlClient;
 using ToDoList.Models;
 
-namespace ToDoList.Repositories;
-
-public class CategoryRepository
+namespace ToDoList.Repositories
 {
-    private readonly ToDoContext _context;
-    public CategoryRepository(ToDoContext context)
+    public class CategoryRepository
     {
-        _context = context;
-    }
-    public List<CategoryModel> GetAllCategories()
-    {
-        return _context.Categories.ToList();
+        private readonly string _connectionString;
+
+        public CategoryRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public List<CategoryModel> GetAllCategories()
+        {
+            using (IDbConnection db = new SqlConnection(_connectionString))
+            {
+                string query = "SELECT Id, Name FROM Categories";
+                return db.Query<CategoryModel>(query).AsList();
+            }
+        }
     }
 }

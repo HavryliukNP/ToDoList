@@ -1,22 +1,23 @@
 ﻿using System.Xml;
+using ToDoList.Data;
 using ToDoList.Models;
 
 namespace ToDoList.Repositories
 {
-   public class XmlTaskRepository
+   public class XmlTaskRepository : ITaskRepository
     {
-        private readonly string _xmlFilePath;
+         private readonly XmlStorageContext _context;
 
-        public XmlTaskRepository(string xmlFilePath)
+        public XmlTaskRepository(XmlStorageContext context)
         {
-            _xmlFilePath = xmlFilePath;
+            _context = context;
         }
 
         public List<TaskModel> GetAllTasks()
         {
             var tasks = new List<TaskModel>();
             XmlDocument doc = new XmlDocument();
-            doc.Load(_xmlFilePath);
+            doc.Load(_context.XmlFilePath);
 
             foreach (XmlNode node in doc.SelectNodes("DB/Tasks/Task"))
             {
@@ -30,16 +31,15 @@ namespace ToDoList.Repositories
                     IsCompleted = bool.Parse(node.SelectSingleNode("IsCompleted").InnerText)
                 });
             }
-            tasks = tasks.OrderBy(t => t.IsCompleted).ToList(); 
+            tasks = tasks.OrderBy(t => t.IsCompleted).ToList();
 
             return tasks;
         }
 
-
         public void AddTask(TaskModel task)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(_xmlFilePath);
+            doc.Load(_context.XmlFilePath);
 
             XmlElement newTask = doc.CreateElement("Task");
 
@@ -69,8 +69,9 @@ namespace ToDoList.Repositories
 
             XmlNode tasksNode = doc.SelectSingleNode("DB/Tasks");
             tasksNode.AppendChild(newTask);
-            doc.Save(_xmlFilePath);
+            doc.Save(_context.XmlFilePath);
         }
+
         private int GetUniqueIntId()
         {
             return (int)DateTime.Now.Ticks;
@@ -79,13 +80,13 @@ namespace ToDoList.Repositories
         public void UpdateTaskStatus(int taskId, bool isCompleted)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load(_xmlFilePath);
+            doc.Load(_context.XmlFilePath);
 
             XmlNode taskToUpdate = doc.SelectSingleNode($"DB/Tasks/Task[Id='{taskId}']");
             if (taskToUpdate != null)
             {
                 taskToUpdate.SelectSingleNode("IsCompleted").InnerText = isCompleted.ToString();
-                doc.Save(_xmlFilePath);
+                doc.Save(_context.XmlFilePath);
             }
         }
     }

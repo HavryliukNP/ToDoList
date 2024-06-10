@@ -6,16 +6,16 @@ namespace ToDoList.Controllers
 {
     public class TaskController : Controller
     {
-        private readonly TaskRepository _sqlTaskRepository;
-        private readonly XmlTaskRepository _xmlTaskRepository;
+        private readonly TaskRepository _sqlToDoListRepository;
+        private readonly XmlTaskRepository _xmlToDoListRepository;
         private readonly CategoryRepository _sqlCategoryRepository;
         private readonly XmlCategoryRepository _xmlCategoryRepository;
 
-        public TaskController(TaskRepository sqlTaskRepository, XmlTaskRepository xmlTaskRepository, 
+        public TaskController(TaskRepository sqlToDoListRepository, XmlTaskRepository xmlToDoListRepository, 
                               CategoryRepository sqlCategoryRepository, XmlCategoryRepository xmlCategoryRepository)
         {
-            _sqlTaskRepository = sqlTaskRepository;
-            _xmlTaskRepository = xmlTaskRepository;
+            _sqlToDoListRepository = sqlToDoListRepository;
+            _xmlToDoListRepository = xmlToDoListRepository;
             _sqlCategoryRepository = sqlCategoryRepository;
             _xmlCategoryRepository = xmlCategoryRepository;
         }
@@ -33,7 +33,7 @@ namespace ToDoList.Controllers
             TempData.Keep("useXml");
             
             
-            var tasks = useXml ? _xmlTaskRepository.GetAllTasks() : _sqlTaskRepository.GetAllTasks();
+            var tasks = useXml ? _xmlToDoListRepository.GetAllTasks() : _sqlToDoListRepository.GetAllTasks();
             var categories = useXml 
                 ? _xmlCategoryRepository.GetAllCategories().ToDictionary(c => c.Id, c => c.Name)
                 : _sqlCategoryRepository.GetAllCategories().ToDictionary(c => c.Id, c => c.Name);
@@ -55,11 +55,11 @@ namespace ToDoList.Controllers
 
             if (useXml)
             {
-                _xmlTaskRepository.AddTask(task);
+                _xmlToDoListRepository.AddTask(task);
             }
             else
             {
-                _sqlTaskRepository.AddTask(task);
+                _sqlToDoListRepository.AddTask(task);
             }
 
             return RedirectToAction("Index", new { useXml });
@@ -71,11 +71,11 @@ namespace ToDoList.Controllers
 
             if (useXml)
             {
-                _xmlTaskRepository.UpdateTaskStatus(taskId, isCompleted);
+                _xmlToDoListRepository.UpdateTaskStatus(taskId, isCompleted);
             }
             else
             {
-                _sqlTaskRepository.UpdateTaskStatus(taskId, isCompleted);
+                _sqlToDoListRepository.UpdateTaskStatus(taskId, isCompleted);
             }
 
             return RedirectToAction("Index", new { useXml });

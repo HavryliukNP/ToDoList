@@ -49,9 +49,17 @@
               "target": "Package",
               "version": "[2.0.78, )"
             },
+            "GraphQL.Server.Transports.AspNetCore": {
+              "target": "Package",
+              "version": "[7.7.1, )"
+            },
+            "GraphiQL": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.6, )"
             },
             "Microsoft.Data.SqlClient": {
               "target": "Package",

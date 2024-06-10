@@ -1,23 +1,24 @@
 ﻿using System.Xml;
+using ToDoList.Data;
 using ToDoList.Models;
 
 namespace ToDoList.Repositories
 {
-    public class XmlCategoryRepository
+    public class XmlCategoryRepository : ICategoryRepository
     {
-        private readonly string _xmlFilePath;
+        private readonly XmlStorageContext _context;
 
-        public XmlCategoryRepository(string xmlFilePath)
+        public XmlCategoryRepository(XmlStorageContext context)
         {
-            _xmlFilePath = xmlFilePath;
+            _context = context;
         }
 
         public List<CategoryModel> GetAllCategories()
         {
             var categories = new List<CategoryModel>();
             var doc = new XmlDocument();
-            doc.Load(_xmlFilePath);
-            
+            doc.Load(_context.XmlFilePath);
+
             foreach (XmlNode node in doc.SelectNodes("DB/Categories/Category"))
             {
                 categories.Add(new CategoryModel

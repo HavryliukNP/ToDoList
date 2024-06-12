@@ -23,13 +23,10 @@ namespace ToDoList.Controllers
         public IActionResult Index(bool useXml = false, bool isFromLink = false)
         {
             if (isFromLink)
-            {
                 TempData["useXml"] = useXml;
-            }
             else if (TempData.ContainsKey("useXml"))
-            {
                 useXml = (bool)TempData["useXml"];
-            }
+            
             TempData.Keep("useXml");
             
             
@@ -54,13 +51,9 @@ namespace ToDoList.Controllers
             bool useXml = (bool)TempData["useXml"];
 
             if (useXml)
-            {
                 _xmlToDoListRepository.AddTask(task);
-            }
             else
-            {
                 _sqlToDoListRepository.AddTask(task);
-            }
 
             return RedirectToAction("Index", new { useXml });
         }
@@ -70,13 +63,20 @@ namespace ToDoList.Controllers
             bool useXml = (bool)TempData["useXml"];
 
             if (useXml)
-            {
                 _xmlToDoListRepository.UpdateTaskStatus(taskId, isCompleted);
-            }
             else
-            {
                 _sqlToDoListRepository.UpdateTaskStatus(taskId, isCompleted);
-            }
+
+            return RedirectToAction("Index", new { useXml });
+        }
+        public IActionResult DeleteTask(int taskId)
+        {
+            bool useXml = (bool)TempData["useXml"];
+
+            if (useXml)
+                _xmlToDoListRepository.DeleteTask(taskId);
+            else
+                _sqlToDoListRepository.DeleteTask(taskId);
 
             return RedirectToAction("Index", new { useXml });
         }

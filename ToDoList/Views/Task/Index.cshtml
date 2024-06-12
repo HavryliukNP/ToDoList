@@ -1,5 +1,7 @@
 ﻿@model ToDoList.Models.TaskViewModel
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <div class="d-flex justify-content-center mb-3">
     <div class="btn-group" role="group">
         <a class="btn @(Model.UseXml ? "btn-primary" : "btn-outline-primary")"
@@ -54,12 +56,13 @@
         <th>Дата виконання</th>
         <th>Категорія</th>
         <th>Виконано</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
     @foreach (var task in Model.Tasks)
     {
-    <tr>
+    <tr class="@(task.IsCompleted ? "completed-task" : "")">
         <td>@task.Title</td>
         <td>@task.Description</td>
         <td>@task.DueDate?.ToString("dd-MM-yyyy")</td>
@@ -71,6 +74,16 @@
                 <input type="checkbox" name="isCompleted" value="true" @(task.IsCompleted ? "checked" : "") onchange="this.form.submit()" />
             </form>
         </td>
+        <td>
+            <form method="post" asp-action="DeleteTask" asp-controller="Task">
+                <input type="hidden" name="taskId" value="@task.Id" />
+                <input type="hidden" name="useXml" value="@Model.UseXml" />
+                <button type="submit" class="btn btn-link p-0">
+                    <i class="fa-solid fa-trash deleteTask"></i>
+                </button>
+            </form>
+        </td>
+
     </tr>
     }
     </tbody>

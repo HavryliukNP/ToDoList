@@ -31,11 +31,12 @@ namespace ToDoList.Repositories
                     IsCompleted = bool.Parse(node.SelectSingleNode("IsCompleted").InnerText)
                 });
             }
-            tasks = tasks.OrderBy(t => t.IsCompleted).ToList();
+    
+            tasks = tasks.OrderBy(t => t.IsCompleted).ThenByDescending(t => t.Id).ToList();
 
             return tasks;
         }
-
+        
         public void AddTask(TaskModel task)
         {
             XmlDocument doc = new XmlDocument();
@@ -74,9 +75,24 @@ namespace ToDoList.Repositories
 
         private int GetUniqueIntId()
         {
-            return (int)DateTime.Now.Ticks;
-        }
+            XmlDocument doc = new XmlDocument();
+            doc.Load(_context.XmlFilePath);
 
+            XmlNodeList nodes = doc.SelectNodes("DB/Tasks/Task/Id");
+            int maxId = 0;
+
+            foreach (XmlNode node in nodes)
+            {
+                int currentId = int.Parse(node.InnerText);
+                if (currentId > maxId)
+                {
+                    maxId = currentId;
+                }
+            }
+
+            return maxId + 1;
+        }
+        
         public void UpdateTaskStatus(int taskId, bool isCompleted)
         {
             XmlDocument doc = new XmlDocument();
@@ -89,5 +105,19 @@ namespace ToDoList.Repositories
                 doc.Save(_context.XmlFilePath);
             }
         }
+        public void DeleteTask(int taskId)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(_context.XmlFilePath);
+
+            XmlNode taskToDelete = doc.SelectSingleNode($"DB/Tasks/Task[Id='{taskId}']");
+            if (taskToDelete != null)
+            {
+                XmlNode tasksNode = doc.SelectSingleNode("DB/Tasks");
+                tasksNode.RemoveChild(taskToDelete);
+                doc.Save(_context.XmlFilePath);
+            }
+        }
+
     }
 }

@@ -38,5 +38,17 @@ public class TaskMutation : ObjectGraphType
             
             return taskRepository.GetAllTasks();
         });
+        
+        Field<ListGraphType<TaskType>>("deleteTask").Arguments(new QueryArguments(new QueryArgument<IntGraphType>
+        {
+            Name = "taskId"
+        })).Resolve(context =>
+        {
+            var taskId = context.GetArgument<int>("taskId");
+            
+            taskRepository.DeleteTask(taskId);
+            
+            return taskRepository.GetAllTasks();
+        });
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using System.Data;
 using ToDoList.Data;
 using ToDoList.Models;
 
@@ -16,31 +15,40 @@ namespace ToDoList.Repositories
 
         public void AddTask(TaskModel task)
         {
-            using (IDbConnection db = _context.CreateConnection())
-            {
-                string query = "INSERT INTO Tasks (Title, Description, DueDate, CategoryId, IsCompleted) VALUES (@Title, @Description, @DueDate, @CategoryId, @IsCompleted)";
-                db.Execute(query, task);
-            }
+            var connection = _context.CreateConnection();
+                
+            var sql = "INSERT INTO Tasks (Title, Description, DueDate, CategoryId, IsCompleted) VALUES (@Title, @Description, @DueDate, @CategoryId, @IsCompleted)";
+            
+            connection.Execute(sql, task);
         }
 
         public List<TaskModel> GetAllTasks()
         {
             var connection = _context.CreateConnection();
                 
-            var sql = "SELECT Id, Title, Description, DueDate, CategoryId, IsCompleted FROM Tasks ORDER BY IsCompleted";
-            
-            var tasks =  connection.Query<TaskModel>(sql);
+            var sql = "SELECT Id, Title, Description, DueDate, CategoryId, IsCompleted FROM Tasks ORDER BY IsCompleted, Id DESC";
+    
+            var tasks = connection.Query<TaskModel>(sql);
 
             return tasks.ToList();
         }
 
         public void UpdateTaskStatus(int taskId, bool isCompleted)
         {
-            using (IDbConnection db = _context.CreateConnection())
-            {
-                string query = "UPDATE Tasks SET IsCompleted = @IsCompleted WHERE Id = @TaskId";
-                db.Execute(query, new { IsCompleted = isCompleted, TaskId = taskId });
-            }
+            var connection = _context.CreateConnection();
+                
+            var sql = "UPDATE Tasks SET IsCompleted = @IsCompleted WHERE Id = @TaskId";
+            
+            connection.Execute(sql, new { IsCompleted = isCompleted, TaskId = taskId });
         }
+        public void DeleteTask(int taskId)
+        {
+            var connection = _context.CreateConnection();
+                
+            var sql = "DELETE FROM Tasks WHERE Id = @TaskId";
+    
+            connection.Execute(sql, new { TaskId = taskId });
+        }
+
     }
 }

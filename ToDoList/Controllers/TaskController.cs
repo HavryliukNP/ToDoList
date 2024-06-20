@@ -29,7 +29,6 @@ namespace ToDoList.Controllers
             
             TempData.Keep("useXml");
             
-            
             var tasks = useXml ? _xmlToDoListRepository.GetAllTasks() : _sqlToDoListRepository.GetAllTasks();
             var categories = useXml 
                 ? _xmlCategoryRepository.GetAllCategories().ToDictionary(c => c.Id, c => c.Name)

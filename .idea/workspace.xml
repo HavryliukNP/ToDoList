@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="10570b1d-5bf0-483b-92d8-c63888ec9e48" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/ToDoList.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/src/App.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/src/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/src/reportWebVitals.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/to-do-list/src/setupTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/AppDbContext.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/ToDoList.DAL.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/Debug/net8.0/ToDoList.DAL.AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/Debug/net8.0/ToDoList.DAL.AssemblyInfoInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/Debug/net8.0/ToDoList.DAL.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/Debug/net8.0/ToDoList.DAL.GlobalUsings.g.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/Debug/net8.0/ToDoList.DAL.assets.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/Debug/net8.0/ToDoList.DAL.csproj.AssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/ToDoList.DAL.csproj.nuget.dgspec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/ToDoList.DAL.csproj.nuget.g.props" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/ToDoList.DAL.csproj.nuget.g.targets" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/project.assets.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/project.nuget.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/project.packagespec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/rider.project.model.nuget.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.DAL/obj/rider.project.restore.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/Entity/TaskEntity.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/ToDoList.Domain.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/Debug/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/Debug/net8.0/ToDoList.Domain.AssemblyInfo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/Debug/net8.0/ToDoList.Domain.AssemblyInfoInputs.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/Debug/net8.0/ToDoList.Domain.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/Debug/net8.0/ToDoList.Domain.GlobalUsings.g.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/Debug/net8.0/ToDoList.Domain.assets.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/ToDoList.Domain.csproj.nuget.dgspec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/ToDoList.Domain.csproj.nuget.g.props" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/ToDoList.Domain.csproj.nuget.g.targets" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/project.assets.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/project.nuget.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/project.packagespec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/rider.project.model.nuget.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList.Domain/obj/rider.project.restore.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/bin/Debug/net8.0/ToDoList.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/bin/Debug/net8.0/ToDoList.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/bin/Debug/net8.0/ToDoList.exe" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/bin/Debug/net8.0/ToDoList.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/bin/Debug/net8.0/ToDoList.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/bin/Debug/net8.0/ToDoList.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ToDoList.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ref/ToDoList.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/ref/ToDoList.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/refint/ToDoList.dll" beforeDir="false" afterPath="$PROJECT_DIR$/ToDoList/obj/Debug/net8.0/refint/ToDoList.dll" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2huuDf23H9vQZybhg8rkN2Y3tIw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.App.js.executor": "Run",
+    "Node.js.index.js.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/nazar/RiderProjects/ToDoList/to-do-list",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="10570b1d-5bf0-483b-92d8-c63888ec9e48" name="Changes" comment="" />
+      <created>1718456164927</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718456164927</updated>
+      <workItem from="1718456165986" duration="2297000" />
+      <workItem from="1718467162821" duration="318000" />
+      <workItem from="1718467495383" duration="18000" />
+      <workItem from="1718467568833" duration="13000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

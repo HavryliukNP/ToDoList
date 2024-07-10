@@ -1,40 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    fetchTasksStart,
+    addTaskStart,
+    updateTaskStatusStart,
+    deleteTaskStart,
+    fetchCategoriesStart,
+} from '../store/tasks/taskSlice';
 
-function Main({ categories, tasks, addTask, updateTaskStatus, deleteTask }) {
-    const uncompletedTasks = tasks.filter(task => !task.isCompleted).sort((a, b) => b.id - a.id);
-    const completedTasks = tasks.filter(task => task.isCompleted);
+function Main() {
+    const dispatch = useDispatch();
+    const { tasks, categories, loading, error } = useSelector(state => state.tasks);
 
     const [title, setTitle] = useState('');
     const [dueDate, setDueDate] = useState('');
     const [categoryId, setCategoryId] = useState('');
     const [description, setDescription] = useState('');
+    const [showCategoryRequired, setShowCategoryRequired] = useState(false);
+
+    useEffect(() => {
+        dispatch(fetchTasksStart());
+        dispatch(fetchCategoriesStart());
+    }, [dispatch]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!categoryId) {
+            setShowCategoryRequired(true);
+            return;
+        }
+
+        setShowCategoryRequired(false);
+
         const newTask = {
-            id: tasks.length + 1,
             title,
-            description,
-            dueDate,
             categoryId: parseInt(categoryId),
             isCompleted: false,
         };
-
-        addTask(newTask);
-
+        if (description) {
+            newTask.description = description;
+        }
+        if (dueDate) {
+            newTask.dueDate = dueDate;
+        }
+        dispatch(addTaskStart(newTask));
         setTitle('');
         setDueDate('');
         setDescription('');
         setCategoryId('');
     };
 
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
     return (
         <div>
             <h1 className="mb-3 text-center">Створення задачі</h1>
-
             <form id="createTaskForm" onSubmit={handleSubmit}>
-
                 <div className="mb-3">
                     <label className="form-label" htmlFor="title">Назва задачі</label>
                     <input
@@ -47,7 +76,6 @@ function Main({ categories, tasks, addTask, updateTaskStatus, deleteTask }) {
                         required
                     />
                 </div>
-
                 <div className="mb-3">
                     <label className="form-label" htmlFor="dueDate">Дата виконання (необов’язково)</label>
                     <input
@@ -59,22 +87,25 @@ function Main({ categories, tasks, addTask, updateTaskStatus, deleteTask }) {
                         onChange={(e) => setDueDate(e.target.value)}
                     />
                 </div>
-
                 <div className="mb-3">
                     <label className="form-label" htmlFor="CategoryId">Категорія задачі</label>
                     <select
                         id="CategoryId"
                         name="CategoryId"
-                        className="form-control"
+                        className={`form-select ${showCategoryRequired && !categoryId ? 'form-select-required' : ''}`}
                         value={categoryId}
-                        onChange={(e) => setCategoryId(e.target.value)}
+                        onChange={(e) => {
+                            setCategoryId(e.target.value);
+                            setShowCategoryRequired(false);
+                        }}
+                        required
                     >
+                        <option value="">Виберіть категорію</option>
                         {categories.map(category => (
                             <option key={category.id} value={category.id}>{category.name}</option>
                         ))}
                     </select>
                 </div>
-
                 <div className="mb-3">
                     <label className="form-label" htmlFor="description">Опис задачі</label>
                     <textarea
@@ -102,66 +133,38 @@ function Main({ categories, tasks, addTask, updateTaskStatus, deleteTask }) {
                 </tr>
                 </thead>
                 <tbody>
-                {uncompletedTasks.map(task => (
-                    <tr key={task.id} className={task.isCompleted ? "completed-task" : ""}>
-                        {/* Render task details */}
-                        <td>{task.title}</td>
-                        <td>{task.description}</td>
-                        <td>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : ""}</td>
-                        <td>{categories.find(category => category.id === task.categoryId)?.name}</td>
-                        <td>
-                            <input
-                                type="checkbox"
-                                name="isCompleted"
-                                value="true"
-                                defaultChecked={task.isCompleted}
-                                onChange={(e) => {
-                                    updateTaskStatus(task.id, e.target.checked);
-                                }}
-                            />
-                        </td>
-                        <td>
-                            <button
-                                className="btn btn-link p-0"
-                                onClick={() => {
-                                    deleteTask(task.id);
-                                }}
-                            >
-                                <i className="fa-solid fa-trash deleteTask"></i>
-                            </button>
-                        </td>
+                {tasks && tasks.length > 0 ? (
+                    tasks.map(task => (
+                        <tr key={task.id} className={task.isCompleted ? "completed-task" : ""}>
+                            <td>{task.title}</td>
+                            <td>{task.description}</td>
+                            <td>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : ""}</td>
+                            <td>{categories.find(category => category.id === task.categoryId)?.name}</td>
+                            <td>
+                                <input
+                                    type="checkbox"
+                                    name="isCompleted"
+                                    checked={task.isCompleted}
+                                    onChange={() => dispatch(updateTaskStatusStart({ taskId: task.id, isCompleted: !task.isCompleted }))} // зміна статусу
+                                />
+                            </td>
+                            <td>
+                                <button
+                                    className="btn btn-link p-0"
+                                    onClick={() => {
+                                        dispatch(deleteTaskStart(task.id));
+                                    }}
+                                >
+                                    <i className="fa-solid fa-trash deleteTask"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    ))
+                ) : (
+                    <tr>
+                        <td colSpan="6" className="text-center">Немає доступних задач</td>
                     </tr>
-                ))}
-                {completedTasks.map(task => (
-                    <tr key={task.id} className={task.isCompleted ? "completed-task" : ""}>
-                        {/* Render task details */}
-                        <td>{task.title}</td>
-                        <td>{task.description}</td>
-                        <td>{task.dueDate ? new Date(task.dueDate).toLocaleDateString() : ""}</td>
-                        <td>{categories.find(category => category.id === task.categoryId)?.name}</td>
-                        <td>
-                            <input
-                                type="checkbox"
-                                name="isCompleted"
-                                value="true"
-                                defaultChecked={task.isCompleted}
-                                onChange={(e) => {
-                                    updateTaskStatus(task.id, e.target.checked);
-                                }}
-                            />
-                        </td>
-                        <td>
-                            <button
-                                className="btn btn-link p-0"
-                                onClick={() => {
-                                    deleteTask(task.id);
-                                }}
-                            >
-                                <i className="fa-solid fa-trash deleteTask"></i>
-                            </button>
-                        </td>
-                    </tr>
-                ))}
+                )}
                 </tbody>
             </table>
         </div>

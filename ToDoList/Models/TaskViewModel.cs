@@ -1,4 +1,6 @@
-﻿namespace ToDoList.Models;
+﻿using System.Collections.Generic;
+
+namespace ToDoList.Models;
 
 public class TaskViewModel
 {

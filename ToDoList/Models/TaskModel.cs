@@ -1,4 +1,7 @@
-﻿namespace ToDoList.Models;
+﻿using System;
+using GraphQL.Types;
+
+namespace ToDoList.Models;
 
 public class TaskModel
 {

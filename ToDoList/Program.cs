@@ -1,6 +1,8 @@
 using GraphiQl;
 using GraphQL;
 using GraphQL.Types;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using ToDoList.Data;
 using ToDoList.Mutations;
 using ToDoList.Query;
@@ -10,6 +12,19 @@ using ToDoList.Type;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Додайте CORS політику
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
+// Додайте сервіси та сховище
 builder.Services.AddSingleton<ToDoContext>();
 builder.Services.AddSingleton<XmlStorageContext>();
 
@@ -35,8 +50,10 @@ builder.Services.AddTransient<RootQuery>();
 
 builder.Services.AddTransient<ISchema, RootSchema>();
 
+// Додайте GraphQL
 builder.Services.AddGraphQL(b => b.AddAutoSchema<ISchema>().AddSystemTextJson());
 
+// Додайте контролери та налаштування компіляції Razor
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 var app = builder.Build();
@@ -47,15 +64,19 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Використовуйте CORS політику
+app.UseCors("AllowReactApp");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
-app.UseGraphiQl("/graphql");
-app.UseGraphQL<ISchema>();
 
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Використовуйте GraphiQL та GraphQL
+app.UseGraphiQl("/graphql");
+app.UseGraphQL<ISchema>();
 
 app.MapControllerRoute(
     name: "default",

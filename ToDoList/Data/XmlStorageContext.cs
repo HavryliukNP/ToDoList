@@ -1,4 +1,6 @@
-﻿namespace ToDoList.Data;
+﻿using Microsoft.Extensions.Configuration;
+
+namespace ToDoList.Data;
 
 public class XmlStorageContext
 {

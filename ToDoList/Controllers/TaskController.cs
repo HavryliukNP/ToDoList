@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Models;
 using ToDoList.Repositories;
@@ -20,7 +19,11 @@ namespace ToDoList.Controllers
             _sqlCategoryRepository = sqlCategoryRepository;
             _xmlCategoryRepository = xmlCategoryRepository;
         }
-
+        private ITaskRepository GetRepository()
+        {
+            bool useXml = (bool)TempData["useXml"];
+            return useXml ? _xmlToDoListRepository : _sqlToDoListRepository;
+        }
         public IActionResult Index(bool useXml = false, bool isFromLink = false)
         {
             if (isFromLink)
@@ -48,37 +51,20 @@ namespace ToDoList.Controllers
         [HttpPost]
         public IActionResult Create(TaskModel task)
         {
-            bool useXml = (bool)TempData["useXml"];
-
-            if (useXml)
-                _xmlToDoListRepository.AddTask(task);
-            else
-                _sqlToDoListRepository.AddTask(task);
-
-            return RedirectToAction("Index", new { useXml });
+            GetRepository().AddTask(task);
+            return RedirectToAction("Index", new { useXml = TempData["useXml"] });
         }
         
         public IActionResult UpdateTaskStatus(int taskId, bool isCompleted)
         {
-            bool useXml = (bool)TempData["useXml"];
-
-            if (useXml)
-                _xmlToDoListRepository.UpdateTaskStatus(taskId, isCompleted);
-            else
-                _sqlToDoListRepository.UpdateTaskStatus(taskId, isCompleted);
-
-            return RedirectToAction("Index", new { useXml });
+            GetRepository().UpdateTaskStatus(taskId, isCompleted);
+            return RedirectToAction("Index", new { useXml = TempData["useXml"] });
         }
+
         public IActionResult DeleteTask(int taskId)
         {
-            bool useXml = (bool)TempData["useXml"];
-
-            if (useXml)
-                _xmlToDoListRepository.DeleteTask(taskId);
-            else
-                _sqlToDoListRepository.DeleteTask(taskId);
-
-            return RedirectToAction("Index", new { useXml });
+            GetRepository().DeleteTask(taskId);
+            return RedirectToAction("Index", new { useXml = TempData["useXml"] });
         }
     }
 }

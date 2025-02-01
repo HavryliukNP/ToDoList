@@ -415,3 +415,6 @@ C:\Users\nazar\RiderProjects\ToDoList\ToDoList\bin\Debug\net8.0\GraphQLParser.dl
 C:\Users\nazar\RiderProjects\ToDoList\ToDoList\bin\Debug\net8.0\GraphQL.MicrosoftDI.dll
 C:\Users\nazar\RiderProjects\ToDoList\ToDoList\bin\Debug\net8.0\GraphQL.Server.Transports.AspNetCore.dll
 C:\Users\nazar\RiderProjects\ToDoList\ToDoList\bin\Debug\net8.0\GraphQL.SystemTextJson.dll
+C:\Users\nazar\RiderProjects\ToDoList\ToDoList\bin\Debug\net8.0\ToDoList.staticwebassets.endpoints.json
+C:\Users\nazar\RiderProjects\ToDoList\ToDoList\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\nazar\RiderProjects\ToDoList\ToDoList\obj\Debug\net8.0\staticwebassets\msbuild.ToDoList.Microsoft.AspNetCore.StaticWebAssetEndpoints.props

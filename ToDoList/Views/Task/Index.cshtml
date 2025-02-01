@@ -68,23 +68,37 @@
         <td>@task.DueDate?.ToString("dd-MM-yyyy")</td>
         <td>@Model.Categories[task.CategoryId]</td>
         <td>
-            <form method="post" asp-action="UpdateTaskStatus" asp-controller="Task">
-                <input type="hidden" name="taskId" value="@task.Id" />
-                <input type="hidden" name="useXml" value="@Model.UseXml" />
-                <input type="checkbox" name="isCompleted" value="true" @(task.IsCompleted ? "checked" : "") onchange="this.form.submit()" />
-            </form>
+            <input type="checkbox" class="status-checkbox" data-task-id="@task.Id" data-use-xml="@Model.UseXml"
+                   @(task.IsCompleted ? "checked" : "") />
         </td>
         <td>
-            <form method="post" asp-action="DeleteTask" asp-controller="Task">
-                <input type="hidden" name="taskId" value="@task.Id" />
-                <input type="hidden" name="useXml" value="@Model.UseXml" />
-                <button type="submit" class="btn btn-link p-0">
-                    <i class="fa-solid fa-trash deleteTask"></i>
-                </button>
-            </form>
+            <button type="button" class="delete-task btn btn-link p-0" data-task-id="@task.Id" data-use-xml="@Model.UseXml">
+                <i class="fa-solid fa-trash"></i>
+            </button>
         </td>
-
     </tr>
     }
     </tbody>
 </table>
+
+<script>
+    document.querySelectorAll('.status-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            fetch('/Task/UpdateTaskStatus', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `taskId=${this.dataset.taskId}&isCompleted=${this.checked}&useXml=${this.dataset.useXml}`
+            });
+        });
+    });
+
+    document.querySelectorAll('.delete-task').forEach(button => {
+        button.addEventListener('click', function() {
+            fetch('/Task/DeleteTask', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `taskId=${this.dataset.taskId}&useXml=${this.dataset.useXml}`
+            }).then(() => location.reload());
+        });
+    });
+</script>
